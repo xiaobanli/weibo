@@ -1,6 +1,7 @@
 package com.nowcoder.weibo.controller;
 
 
+import com.nowcoder.weibo.service.QiniuService;
 import com.nowcoder.weibo.service.UploadService;
 import com.nowcoder.weibo.util.WeiboUtil;
 import org.slf4j.Logger;
@@ -30,6 +31,8 @@ public class UploadController {
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
     @Autowired
     UploadService uploadService;
+    @Autowired
+    QiniuService qiniuService;
 
 
     @RequestMapping(path = {"/image"}, method = {RequestMethod.GET})
@@ -50,8 +53,8 @@ public class UploadController {
     public String uploadImage(@RequestParam("file") MultipartFile file) {
 
         try {
-            String fileUrl = uploadService.saveImage(file);
-
+           // String fileUrl = uploadService.saveImage(file);
+            String fileUrl = qiniuService.saveImage(file);
             if (fileUrl == null) {
                 return WeiboUtil.getJSONString(1, "上传图片失败");
             }
