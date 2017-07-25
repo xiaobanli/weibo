@@ -35,6 +35,13 @@ public class Weibo {
   public void setImage(String image) {
     this.image = image;
   }
+  public int getCommentCount() {
+    return commentCount;
+  }
+
+  public void setCommentCount(int commentCount) {
+    this.commentCount = commentCount;
+  }
 
 
 

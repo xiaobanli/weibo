@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by nowcoder on 2016/7/2.
+ * Created by lenonvo on 2017/7/2.
  */
 @Mapper
 public interface WeiboDAO {
@@ -24,5 +24,7 @@ public interface WeiboDAO {
     Weibo getById(int id);
     @Update({"update ", TABLE_NAME, " set comment_count = #{commentCount} where id=#{id}"})
     int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
-
+    @Select({"select",})
+    List<Weibo> selectByUserIdAndOffset(@Param("userId") int userId, @Param("offset") int offset,
+                                       @Param("limit") int limit);
 }

@@ -30,28 +30,4 @@
 //    @Autowired
 //    MessageService messageService;
 //    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-//    @RequestMapping(path = {"/addComment"}, method = {RequestMethod.POST})
-//    public String addComment(@RequestParam("messageId") int messageId,
-//                             @RequestParam("content") String content) {
-//        if(hostHolder)
-//        try {
-//            Comment comment = new Comment();
-//            comment.setUserId(hostHolder.getUser().getId());
-//            comment.setContent(content);
-//            comment.setEntityType(EntityType.ENTITY_MESSAGE);
-//            comment.setEntityId(messageId);
-//            comment.setCreatedDate(new Date());
-//            comment.setStatus(0);
-//            commentService.addComment(comment);
-//
-//            int count = commentService.getCommentCount(comment.getEntityId(), comment.getEntityType());
-//            messageService.updateCommentCount(comment.getEntityId(), count);
-//
-//
-//        } catch (Exception e) {
-//            logger.error("提交评论错误" + e.getMessage());
-//        }
-//        return "redirect:/news/" + String.valueOf(messageId);
-//    }
-//
-//}
+
