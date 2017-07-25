@@ -5,28 +5,27 @@ import java.util.Date;
 /**
  * Created by rainday on 16/6/30.
  */
-public class Message {
+public class Weibo {
 
   private int id;
-
-private String content;
+  private String content;
   private String image;
-
-
-
-
   private Date createdDate;
-
   private int userId;
+  private int commentCount;
 
   public int getId() {
     return id;
   }
-
   public void setId(int id) {
     this.id = id;
   }
-
+  public void setContent(String content) {
+    this.content = content;
+  }
+  public String getContent() {
+    return content;
+  }
 
 
   public String getImage() {
