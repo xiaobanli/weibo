@@ -55,13 +55,13 @@ public class LoginController {
     @ResponseBody
     public String login(Model model, @RequestParam("username") String username,
                         @RequestParam("password") String password,
-                        @RequestParam(value="rember", defaultValue = "0") int rememberme) {
+                        @RequestParam(value="rember", defaultValue = "0") int remember) {
         try {
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
-                if (rememberme > 0) {
+                if (remember > 0) {
                     cookie.setMaxAge(3600*24*5);
                 }
                 return WeiboUtil.getJSONString(0, "登录成功");
