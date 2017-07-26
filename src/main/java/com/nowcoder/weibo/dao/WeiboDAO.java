@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Mapper
 public interface WeiboDAO {
-    String TABLE_NAME = " message ";
-    String INSERT_FIELDS = " content, image, created_date, user_id,comment_count ";
+    String TABLE_NAME = " weibo ";
+    String INSERT_FIELDS = " content, image, created_date, user_id, comment_count ";
     String SELECT_FIELDS = " id, " + INSERT_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values (#{content},#{image},#{createdDate},#{userId})"})
+            ") values (#{content},#{image},#{createdDate},#{userId},#{commentCount})"})
     int addWeibo(Weibo weibo);
 
     @Select({"select ", SELECT_FIELDS , " from ", TABLE_NAME, " where id=#{id}"})

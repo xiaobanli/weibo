@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.nowcoder.weibo.dao.WeiboDAO">
     <sql id="table">weibo</sql>
-    <sql id="selectFields">id,content, image, created_date, user_id,comment_count
+    <sql id="selectFields">id, content, image, created_date, user_id, comment_count
     </sql>
     <select id="selectByUserIdAndOffset" resultType="com.nowcoder.model.Weibo">
         SELECT

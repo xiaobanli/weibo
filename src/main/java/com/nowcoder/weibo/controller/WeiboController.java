@@ -40,7 +40,7 @@ public class WeiboController {
 
     @RequestMapping(path = {"/addWeibo/"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String addMessage(@RequestParam("image") String image,
+    public String addWeibo(@RequestParam("image") String image,
                              @RequestParam("content") String content) {
         try {
             Weibo weibo = new Weibo();
@@ -48,7 +48,7 @@ public class WeiboController {
 
             weibo.setImage(image);
             weibo.setContent(content);
-
+            weibo.setCommentCount(0);
             if (hostHolder.getUser() != null) {
                 weibo.setUserId(hostHolder.getUser().getId());
             } else {

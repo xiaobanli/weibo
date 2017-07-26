@@ -51,10 +51,9 @@ public class UploadController {
     @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody
     public String uploadImage(@RequestParam("file") MultipartFile file) {
-
         try {
-           // String fileUrl = uploadService.saveImage(file);
-            String fileUrl = qiniuService.saveImage(file);
+            String fileUrl = uploadService.saveImage(file);
+            //String fileUrl = qiniuService.saveImage(file);
             if (fileUrl == null) {
                 return WeiboUtil.getJSONString(1, "上传图片失败");
             }
@@ -63,7 +62,5 @@ public class UploadController {
             logger.error("上传图片失败" + e.getMessage());
             return WeiboUtil.getJSONString(1, "上传失败");
         }
-
-
     }
 }
