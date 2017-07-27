@@ -105,7 +105,7 @@ public static void Xmlutil() throws Exception {
 
 
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         try {
             /*
            StringUtil();
