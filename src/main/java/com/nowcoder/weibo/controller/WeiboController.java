@@ -83,7 +83,7 @@ public class WeiboController {
     }
 
     @RequestMapping(path = {"/addComment"}, method = {RequestMethod.POST})
-    public String addComment(@RequestParam("messageId") int messageId,
+    public String addComment(@RequestParam("weiboId") int weiboId,
                              @RequestParam("content") String content) {
 
         try {
@@ -91,7 +91,7 @@ public class WeiboController {
             comment.setUserId(hostHolder.getUser().getId());
             comment.setContent(content);
             comment.setEntityType(EntityType.ENTITY_COMMENT);
-            comment.setEntityId(messageId);
+            comment.setEntityId(weiboId);
             comment.setCreatedDate(new Date());
             comment.setStatus(0);
             commentService.addComment(comment);
@@ -103,7 +103,7 @@ public class WeiboController {
         } catch (Exception e) {
             logger.error("提交评论错误" + e.getMessage());
         }
-        return "redirect:/news/" + String.valueOf(messageId);
+        return commentService.toString()+"添加评论成功";
     }
 
 }

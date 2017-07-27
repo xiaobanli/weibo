@@ -65,7 +65,7 @@ public class MessageController {
         } catch (Exception e) {
             logger.error("获取站内信列表失败" + e.getMessage());
         }
-        return model.toString();
+        return "";
     }
 
     @RequestMapping(path = {"/msg/detail"}, method = {RequestMethod.GET})
@@ -85,10 +85,12 @@ public class MessageController {
                 msgdetail.add(vo);
             }
             model.addAttribute("messages", msgdetail);
+
         } catch (Exception e) {
             logger.error("获取站内信详情失败" + e.getMessage());
+            return WeiboUtil.getJSONString(1, "站内信详情失败");
         }
-        return model.toString();
+        return "";
     }
 
 
