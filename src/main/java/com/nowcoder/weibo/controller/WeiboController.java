@@ -3,10 +3,7 @@ package com.nowcoder.weibo.controller;
 
 import com.nowcoder.weibo.model.*;
 
-import com.nowcoder.weibo.service.CommentService;
-import com.nowcoder.weibo.service.QiniuService;
-import com.nowcoder.weibo.service.UserService;
-import com.nowcoder.weibo.service.WeiboService;
+import com.nowcoder.weibo.service.*;
 import com.nowcoder.weibo.util.WeiboUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +33,8 @@ public class WeiboController {
     UserService userService;
     @Autowired
     CommentService commentService;
-
+@Autowired
+    LikeService likeService;
 
     @RequestMapping(path = {"/addWeibo/"}, method = {RequestMethod.POST})
     @ResponseBody
@@ -66,17 +64,24 @@ public class WeiboController {
     @RequestMapping(path = {"/weibo/{weiboId}"}, method = {RequestMethod.GET})
     public String weiboDetail(@PathVariable("weiboId") int weiboId, Model model) {
         Weibo weibo = weiboService.getById(weiboId);
-
-        // 评论
-        List<Comment> comments = commentService.getCommentsByEntity(weibo.getId(), EntityType.ENTITY_WEIBO);
-        List<ViewObject> commentVOs = new ArrayList<ViewObject>();
-        for (Comment comment : comments) {
-            ViewObject vo = new ViewObject();
-            vo.set("comment", comment);
-            vo.set("user", userService.getUser(comment.getUserId()));
-            commentVOs.add(vo);
+        if (weibo != null) {
+            int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
+            if (localUserId != 0) {
+                model.addAttribute("like", likeService.getLikeStatus(localUserId, EntityType.ENTITY_WEIBO, weibo.getId()));
+            } else {
+                model.addAttribute("like", 0);
+            }
+            // 评论
+            List<Comment> comments = commentService.getCommentsByEntity(weibo.getId(), EntityType.ENTITY_WEIBO);
+            List<ViewObject> commentVOs = new ArrayList<ViewObject>();
+            for (Comment comment : comments) {
+                ViewObject vo = new ViewObject();
+                vo.set("comment", comment);
+                vo.set("user", userService.getUser(comment.getUserId()));
+                commentVOs.add(vo);
+            }
+            model.addAttribute("comments", commentVOs);
         }
-        model.addAttribute("comments", commentVOs);
         model.addAttribute("weibo", weibo);
         model.addAttribute("user", userService.getUser(weibo.getUserId()));
         return model.toString();

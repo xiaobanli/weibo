@@ -11,7 +11,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Tuple;
 
-import java.util.List;
+
 
 /**
  * Created by lenovo on 2017/7/13.
@@ -116,21 +116,7 @@ public class JedisAdapter implements InitializingBean{
             j.get("a");
             System.out.println("pool"+i);
             j.close();
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 

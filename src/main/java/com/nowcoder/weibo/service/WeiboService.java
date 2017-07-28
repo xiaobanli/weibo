@@ -31,6 +31,9 @@ public class WeiboService {
     public int updateCommentCount(int id, int count) {
         return weiboDAO.updateCommentCount(id, count);
     }
+    public int updateLikeCount(int id, int count) {
+        return weiboDAO.updateLikeCount(id, count);
+    }
 }
 
 

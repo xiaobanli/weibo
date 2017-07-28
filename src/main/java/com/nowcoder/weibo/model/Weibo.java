@@ -14,6 +14,16 @@ public class Weibo {
   private int userId;
   private int commentCount;
 
+  public int getLikeCount() {
+    return likeCount;
+  }
+
+  public void setLikeCount(int likeCount) {
+    this.likeCount = likeCount;
+  }
+
+  private int likeCount;
+
   public int getId() {
     return id;
   }
