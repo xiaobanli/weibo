@@ -2,6 +2,7 @@ package com.nowcoder.weibo.controller;
 
 
 import com.nowcoder.weibo.async.EventModel;
+import com.nowcoder.weibo.async.EventProducer;
 import com.nowcoder.weibo.async.EventType;
 import com.nowcoder.weibo.model.EntityType;
 import com.nowcoder.weibo.model.HostHolder;
@@ -30,30 +31,31 @@ public class LikeController {
     @Autowired
     WeiboService weiboService;
 
-
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/like"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String like(@Param("weiboId") int weiboId) {
-        long likeCount = likeService.like(2, EntityType.ENTITY_WEIBO, weiboId);
-        //long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_WEIBO, weiboId);
-        // 更新喜欢数
+        //long likeCount = likeService.like(2, EntityType.ENTITY_WEIBO, weiboId);
+        long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_WEIBO, weiboId);
+        // 更新喜欢数;默认设成当前用户id为2；登录时还要hostholder一下
         Weibo weibo = weiboService.getById(weiboId);
         weiboService.updateLikeCount(weiboId, (int) likeCount);
 
-//        eventProducer.fireEvent(new EventModel(EventType.LIKE)
-//                .setActorId(hostHolder.getUser().getId()).setEntityId(weiboId)
-//                .setEntityType(EntityType.ENTITY_WEIBO).setEntityOwnerId(weibo.getUserId()));
+        eventProducer.fireEvent(new EventModel(EventType.LIKE)
+                .setActorId(hostHolder.getUser().getId()).setEntityId(weiboId)
+                .setEntityType(EntityType.ENTITY_WEIBO).setEntityOwnerId(weibo.getUserId()));
 
         return WeiboUtil.getJSONString(0, String.valueOf(likeCount));
     }
 
     @RequestMapping(path = {"/dislike"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String dislike(@Param("newId") int newsId) {
-        long likeCount = likeService.disLike(hostHolder.getUser().getId(), EntityType.ENTITY_WEIBO, newsId);
+    public String dislike(@Param("weiboId") int weiboId) {
+        long likeCount = likeService.disLike(hostHolder.getUser().getId(), EntityType.ENTITY_WEIBO, weiboId);
         // 更新喜欢数
-        weiboService.updateLikeCount(newsId, (int) likeCount);
+        weiboService.updateLikeCount(weiboId, (int) likeCount);
         return WeiboUtil.getJSONString(0, String.valueOf(likeCount));
     }
 }
