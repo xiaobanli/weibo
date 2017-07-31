@@ -83,19 +83,19 @@ public class FollowController {
         return WeiboUtil.getJSONString(0,model.toString());
     }
 
-//    @RequestMapping(path = {"/user/{uid}/followees"}, method = {RequestMethod.GET})
-//    public String followees(Model model, @PathVariable("uid") int userId) {
-//        List<Integer> followeeIds = followService.getFollowees(userId, EntityType.ENTITY_USER, 0, 10);
-//
-//        if (hostHolder.getUser() != null) {
-//            model.addAttribute("followees", getUsersInfo(hostHolder.getUser().getId(), followeeIds));
-//        } else {
-//            model.addAttribute("followees", getUsersInfo(0, followeeIds));
-//        }
-//        model.addAttribute("followeeCount", followService.getFolloweeCount(userId, EntityType.ENTITY_USER));
-//        model.addAttribute("curUser", userService.getUser(userId));
-//        return "followees";
-//    }
+    @RequestMapping(path = {"/user/{uid}/followees"}, method = {RequestMethod.GET})
+    public String followees(Model model, @PathVariable("uid") int userId) {
+        List<Integer> followeeIds = followService.getFollowees(userId,  0, 10);
+
+        if (hostHolder.getUser() != null) {
+            model.addAttribute("followees", getUsersInfo(hostHolder.getUser().getId(), followeeIds));
+        } else {
+            model.addAttribute("followees", getUsersInfo(0, followeeIds));
+        }
+        model.addAttribute("followeeCount", followService.getFolloweeCount(userId));
+        model.addAttribute("curUser", userService.getUser(userId));
+        return WeiboUtil.getJSONString(0,model.toString());
+    }
 
     private List<ViewObject> getUsersInfo(int localUserId, List<Integer> userIds) {
         List<ViewObject> userInfos = new ArrayList<ViewObject>();
