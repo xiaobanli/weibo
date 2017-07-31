@@ -12,6 +12,7 @@ import java.util.Map;
  * Created by lenovo on 2017/7/22.
  */
 public class WeiboUtil {
+    public static int SYSTEM_USERID =0;
     public static String WEIBO_DOMAIN = "http://127.0.0.1:8080/";
     public static String IMAGE_DIR = "G:\\图片上传\\";
     public static String[] IMAGE_FILE_EXTD = new String[] {"png", "bmp", "jpg", "jpeg"};

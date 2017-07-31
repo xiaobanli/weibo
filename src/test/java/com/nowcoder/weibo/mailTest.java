@@ -35,8 +35,8 @@ public class mailTest {
     public void sendSimpleEmail() {
         SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setFrom("1326263565@qq.com");//发送者.
-        message.setTo("last_romeo@163.com");//接收者.
+        message.setFrom("last_romeo@163.com");//发送者.
+        message.setTo("1326263565@qq.com");//接收者.
         message.setSubject("测试邮件（邮件主题）");//邮件主题.
         message.setText("这是邮件内容");//邮件内容.
 

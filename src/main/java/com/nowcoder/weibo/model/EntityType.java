@@ -6,6 +6,8 @@ package com.nowcoder.weibo.model;
 public class EntityType {
     public static int ENTITY_WEIBO = 1;
     public static int ENTITY_COMMENT = 2;
+    public static int ENTITY_FOLLOW = 3;
+
 
 
 
