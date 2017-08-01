@@ -14,11 +14,10 @@ import java.util.List;
 @Service
 public class MessageService {
     @Autowired
-    MessageDAO messageDAO;。
+    MessageDAO messageDAO;
     public int addMessage(Message message) {
         return messageDAO.addMessage(message);
     }
-
     public List<Message> getConversationDetail(String conversationId, int offset, int limit) {
         return messageDAO.getConversationDetail(conversationId, offset, limit);
     }

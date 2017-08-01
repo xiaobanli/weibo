@@ -84,7 +84,7 @@ public class MessageController {
                 vo.set("userId", user.getId());
                 msgdetail.add(vo);
             }
-            model.addAttribute("messages", msgdetail);
+            model.addAttribute("msgdetails", msgdetail);
 
         } catch (Exception e) {
             logger.error("获取站内信详情失败" + e.getMessage());
