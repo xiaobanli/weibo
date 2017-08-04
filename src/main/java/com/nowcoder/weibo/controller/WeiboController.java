@@ -1,6 +1,9 @@
 package com.nowcoder.weibo.controller;
 
 
+import com.nowcoder.weibo.async.EventModel;
+import com.nowcoder.weibo.async.EventProducer;
+import com.nowcoder.weibo.async.EventType;
 import com.nowcoder.weibo.model.*;
 
 import com.nowcoder.weibo.service.*;
@@ -35,6 +38,8 @@ public class WeiboController {
     CommentService commentService;
 @Autowired
     LikeService likeService;
+@Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path = {"/addWeibo/"}, method = {RequestMethod.POST})
     @ResponseBody
@@ -53,7 +58,12 @@ public class WeiboController {
                 // 设置一个匿名用户
                 weibo.setUserId(3);
             }
-            weiboService.addWeibo(weibo);
+            if (weiboService.addWeibo(weibo)>0)
+            {
+                eventProducer.fireEvent(new EventModel(EventType.ADD_WEIBO).setActorId(weibo.getUserId())
+                        .setEntityId(weibo.getId()).setExt("content",weibo.getContent()));
+            }
+
             return WeiboUtil.getJSONString(0, "微博发布成功");
         } catch (Exception e) {
             logger.error("微博添加失败" + e.getMessage());

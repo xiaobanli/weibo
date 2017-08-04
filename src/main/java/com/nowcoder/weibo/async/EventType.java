@@ -9,7 +9,9 @@ public enum EventType {
     LOGIN(2),
     MAIL(3),
     FOLLOW(4),
-    UNFOLLOW(5);
+    UNFOLLOW(5),
+
+    ADD_WEIBO(6);
 
     private int value;
 

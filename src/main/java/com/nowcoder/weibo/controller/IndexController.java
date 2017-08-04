@@ -1,10 +1,7 @@
 package com.nowcoder.weibo.controller;
 
 
-import com.nowcoder.weibo.model.User;
-import com.nowcoder.weibo.service.UserService;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +16,7 @@ import java.util.Enumeration;
  * Created by lenovo on 2017/7/18.
  */
 @Controller
-public class controller {
+public class IndexController {
 
 
     @RequestMapping(path = "/", method = {RequestMethod.GET})
